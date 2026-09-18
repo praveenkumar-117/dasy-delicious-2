@@ -1,108 +1,84 @@
-import React, { useContext, useState } from 'react'
-import { IoMdCloseCircleOutline } from "react-icons/io"
-import { FaUser, FaEnvelope, FaLock, FaUtensils } from "react-icons/fa"
-import axios from 'axios'
-import { StoreContext } from '../context/StoreContext'
+import React, { useContext, useState } from "react";
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import { FaUser, FaEnvelope, FaLock, FaUtensils } from "react-icons/fa";
+import axios from "axios";
+import { StoreContext } from "../context/StoreContext";
 
 const LoginPopup = ({ setShowLogin }) => {
+  const { setToken } = useContext(StoreContext);
 
-  const { setToken } = useContext(StoreContext)
-
-  const [toggle, setToggle] = useState("SignUp")
-  const [isLoading, setIsLoading] = useState(false)
+  const [toggle, setToggle] = useState("SignUp");
+  const [isLoading, setIsLoading] = useState(false);
 
   const [data, setData] = useState({
     username: "",
     email: "",
-    password: ""
-  })
+    password: "",
+  });
 
-  const url = "http://localhost:7000"
+  const url = "https://dasy-delicious-2.onrender.com";
 
   const onChangeHandler = (event) => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
 
-    setData(data => ({
+    setData((data) => ({
       ...data,
-      [name]: value
-    }))
-  }
+      [name]: value,
+    }));
+  };
 
   const onSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     try {
-      setIsLoading(true)
+      setIsLoading(true);
 
       const endpoint =
-        toggle === "SignUp"
-          ? "/api/user/register"
-          : "/api/user/login"
+        toggle === "SignUp" ? "/api/user/register" : "/api/user/login";
 
-      const response = await axios.post(
-        `${url}${endpoint}`,
-        data
-      )
+      const response = await axios.post(`${url}${endpoint}`, data);
 
       if (response.data.success) {
+        localStorage.setItem("token", response.data.token);
 
-        localStorage.setItem(
-          "token",
-          response.data.token
-        )
-
-        setToken(response.data.token)
-        setShowLogin(false)
-
+        setToken(response.data.token);
+        setShowLogin(false);
       } else {
-        alert(response.data.message)
+        alert(response.data.message);
       }
-
     } catch (error) {
-      console.error("Authentication error:", error)
+      console.error("Authentication error:", error);
 
       alert(
         error.response?.data?.message ||
-        "Something went wrong. Please try again."
-      )
-
+          "Something went wrong. Please try again.",
+      );
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const inputClass =
-    "w-full border border-gray-300 rounded-xl py-3 pl-11 pr-4 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all duration-200"
+    "w-full border border-gray-300 rounded-xl py-3 pl-11 pr-4 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all duration-200";
 
   return (
     <div className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm flex justify-center items-center px-4 py-4">
-
       <div className="w-full max-w-md max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-y-auto">
-
         {/* Header */}
         <div className="relative bg-blue-100 px-5 pt-4 pb-4">
-
           {/* Brand */}
           <div className="flex flex-col items-center mb-4">
-
             <div className="w-10 h-10 rounded-full bg-orange-400 text-white flex items-center justify-center shadow-md mb-1.5">
               <FaUtensils className="text-base" />
             </div>
 
-            <h1 className="text-xl font-bold text-gray-800">
-              Dasy Delicious
-            </h1>
+            <h1 className="text-xl font-bold text-gray-800">Dasy Delicious</h1>
 
-            <p className="text-xs text-gray-500">
-              Fresh food, happy moments
-            </p>
-
+            <p className="text-xs text-gray-500">Fresh food, happy moments</p>
           </div>
-
 
           {/* Toggle */}
           <div className="flex bg-white/80 rounded-xl p-1 shadow-sm">
-
             <button
               type="button"
               onClick={() => setToggle("SignUp")}
@@ -126,9 +102,7 @@ const LoginPopup = ({ setShowLogin }) => {
             >
               Login
             </button>
-
           </div>
-
 
           {/* Close */}
           <button
@@ -139,20 +113,12 @@ const LoginPopup = ({ setShowLogin }) => {
           >
             <IoMdCloseCircleOutline className="text-xl" />
           </button>
-
         </div>
-
 
         {/* Signup */}
         {toggle === "SignUp" ? (
-
-          <form
-            onSubmit={onSubmit}
-            className="flex flex-col gap-3.5 px-6 py-5"
-          >
-
+          <form onSubmit={onSubmit} className="flex flex-col gap-3.5 px-6 py-5">
             <div className="text-center mb-1">
-
               <h2 className="text-2xl font-bold text-gray-800">
                 Create Account
               </h2>
@@ -160,13 +126,10 @@ const LoginPopup = ({ setShowLogin }) => {
               <p className="text-sm text-gray-500 mt-1">
                 Join us and start ordering delicious food
               </p>
-
             </div>
-
 
             {/* Username */}
             <div className="relative">
-
               <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
 
               <input
@@ -178,13 +141,10 @@ const LoginPopup = ({ setShowLogin }) => {
                 value={data.username}
                 className={inputClass}
               />
-
             </div>
-
 
             {/* Email */}
             <div className="relative">
-
               <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
 
               <input
@@ -196,13 +156,10 @@ const LoginPopup = ({ setShowLogin }) => {
                 value={data.email}
                 className={inputClass}
               />
-
             </div>
-
 
             {/* Password */}
             <div className="relative">
-
               <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
 
               <input
@@ -214,9 +171,7 @@ const LoginPopup = ({ setShowLogin }) => {
                 value={data.password}
                 className={inputClass}
               />
-
             </div>
-
 
             <button
               type="submit"
@@ -225,33 +180,20 @@ const LoginPopup = ({ setShowLogin }) => {
             >
               {isLoading ? "Creating Account..." : "Create Account"}
             </button>
-
           </form>
-
         ) : (
-
           /* Login */
-          <form
-            onSubmit={onSubmit}
-            className="flex flex-col gap-3.5 px-6 py-5"
-          >
-
+          <form onSubmit={onSubmit} className="flex flex-col gap-3.5 px-6 py-5">
             <div className="text-center mb-1">
-
-              <h2 className="text-2xl font-bold text-gray-800">
-                Welcome Back
-              </h2>
+              <h2 className="text-2xl font-bold text-gray-800">Welcome Back</h2>
 
               <p className="text-sm text-gray-500 mt-1">
                 Login to continue your food journey
               </p>
-
             </div>
-
 
             {/* Email */}
             <div className="relative">
-
               <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
 
               <input
@@ -263,13 +205,10 @@ const LoginPopup = ({ setShowLogin }) => {
                 value={data.email}
                 className={inputClass}
               />
-
             </div>
-
 
             {/* Password */}
             <div className="relative">
-
               <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
 
               <input
@@ -281,9 +220,7 @@ const LoginPopup = ({ setShowLogin }) => {
                 value={data.password}
                 className={inputClass}
               />
-
             </div>
-
 
             <button
               type="submit"
@@ -292,15 +229,11 @@ const LoginPopup = ({ setShowLogin }) => {
             >
               {isLoading ? "Logging in..." : "Login"}
             </button>
-
           </form>
-
         )}
-
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default LoginPopup
+export default LoginPopup;

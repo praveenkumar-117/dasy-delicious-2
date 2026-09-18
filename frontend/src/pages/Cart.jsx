@@ -12,7 +12,7 @@ const Cart = () => {
     addToCart,
     removeFromCart,
     clearCartItem,
-     clearCart,
+    clearCart,
     getCartAmount,
   } = useContext(StoreContext);
 
@@ -24,8 +24,7 @@ const Cart = () => {
 
   const tax = subtotal * 0.05;
 
-  const total = subtotal + deliveryCharge + tax
- 
+  const total = subtotal + deliveryCharge + tax;
 
   return (
     <div className="w-full min-h-[calc(100vh-64px)] bg-blue-100 p-4 sm:p-6 md:p-8">
@@ -97,7 +96,7 @@ const Cart = () => {
                   className="flex flex-wrap sm:flex-nowrap justify-between items-center gap-4 border-b border-gray-300 px-2 sm:px-4 pb-4 mb-4"
                 >
                   <img
-                    src={`http://localhost:7000/images/${item.image}`}
+                    src={`https://dasy-delicious-2.onrender.com/images/${item.image}`}
                     alt={item.name}
                     className="w-20 h-20 sm:w-[90px] sm:h-[90px] object-cover rounded-lg shadow-sm"
                   />

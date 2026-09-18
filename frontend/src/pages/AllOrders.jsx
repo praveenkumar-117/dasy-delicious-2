@@ -11,12 +11,12 @@ const AllOrders = () => {
       const adminToken = localStorage.getItem("adminToken");
 
       const response = await axios.get(
-        "http://localhost:7000/api/order/all",
+        "https://dasy-delicious-2.onrender.com/api/order/all",
         {
           headers: {
             admintoken: adminToken,
           },
-        }
+        },
       );
 
       if (response.data.success) {
@@ -34,7 +34,7 @@ const AllOrders = () => {
       const adminToken = localStorage.getItem("adminToken");
 
       const response = await axios.put(
-        "http://localhost:7000/api/order/status",
+        "https://dasy-delicious-2.onrender.com/api/order/status",
         {
           orderId,
           status: newStatus,
@@ -43,16 +43,14 @@ const AllOrders = () => {
           headers: {
             admintoken: adminToken,
           },
-        }
+        },
       );
 
       if (response.data.success) {
         setOrders((prevOrders) =>
           prevOrders.map((order) =>
-            order._id === orderId
-              ? { ...order, status: newStatus }
-              : order
-          )
+            order._id === orderId ? { ...order, status: newStatus } : order,
+          ),
         );
       }
     } catch (error) {
@@ -82,13 +80,11 @@ const AllOrders = () => {
 
   return (
     <div className="min-h-screen bg-blue-50 flex">
-
       {/* Sidebar */}
       <AdminSidebar />
 
       {/* Main Content */}
       <main className="flex-1 p-5 sm:p-6 lg:p-8 overflow-hidden">
-
         {/* Header */}
         <div className="mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
@@ -103,26 +99,19 @@ const AllOrders = () => {
         {/* Loading */}
         {loading ? (
           <div className="bg-white rounded-2xl shadow-sm p-12 text-center">
-            <p className="text-gray-500 text-lg">
-              Loading orders...
-            </p>
+            <p className="text-gray-500 text-lg">Loading orders...</p>
           </div>
         ) : orders.length === 0 ? (
           /* Empty State */
           <div className="bg-white rounded-2xl shadow-sm p-12 text-center">
-            <p className="text-gray-500 text-lg">
-              No orders found
-            </p>
+            <p className="text-gray-500 text-lg">No orders found</p>
           </div>
         ) : (
           /* Orders Table */
           <div className="bg-white rounded-2xl shadow-sm border border-blue-100 overflow-hidden">
-
             {/* Table Header */}
             <div className="px-5 py-4 bg-orange-400 flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-white">
-                Orders List
-              </h2>
+              <h2 className="text-lg font-semibold text-white">Orders List</h2>
 
               <span className="bg-white text-orange-500 px-3 py-1 rounded-full text-sm font-semibold">
                 {orders.length} Orders
@@ -131,9 +120,7 @@ const AllOrders = () => {
 
             {/* Horizontal Scroll */}
             <div className="overflow-x-auto">
-
               <table className="w-full min-w-[1000px]">
-
                 <thead className="bg-orange-50">
                   <tr>
                     <th className="text-left px-5 py-4 text-sm font-semibold text-gray-700">
@@ -152,8 +139,6 @@ const AllOrders = () => {
                       Total
                     </th>
 
-                    
-
                     <th className="text-left px-5 py-4 text-sm font-semibold text-gray-700">
                       Status
                     </th>
@@ -166,7 +151,6 @@ const AllOrders = () => {
                       key={order._id}
                       className="border-t border-gray-100 hover:bg-blue-50 transition-colors"
                     >
-
                       {/* Order ID */}
                       <td className="px-5 py-5">
                         <span className="font-semibold text-gray-800">
@@ -181,8 +165,7 @@ const AllOrders = () => {
                       {/* Customer */}
                       <td className="px-5 py-5">
                         <p className="font-medium text-gray-800">
-                          {order.address.firstName}{" "}
-                          {order.address.lastName}
+                          {order.address.firstName} {order.address.lastName}
                         </p>
 
                         <p className="text-sm text-gray-500">
@@ -194,10 +177,7 @@ const AllOrders = () => {
                       <td className="px-5 py-5">
                         <div className="space-y-1.5">
                           {order.items.map((item) => (
-                            <div
-                              key={item.itemId}
-                              className="text-sm"
-                            >
+                            <div key={item.itemId} className="text-sm">
                               <span className="font-medium text-gray-800">
                                 {item.name}
                               </span>
@@ -217,21 +197,15 @@ const AllOrders = () => {
                         </span>
                       </td>
 
-                     
-
                       {/* Status */}
                       <td className="px-5 py-5">
-
                         <select
                           value={order.status}
                           onChange={(e) =>
-                            handleStatusChange(
-                              order._id,
-                              e.target.value
-                            )
+                            handleStatusChange(order._id, e.target.value)
                           }
                           className={`px-3 py-2 rounded-lg border text-sm font-medium outline-none cursor-pointer ${getStatusClass(
-                            order.status
+                            order.status,
                           )}`}
                         >
                           <option value="Food Processing">
@@ -242,27 +216,18 @@ const AllOrders = () => {
                             Out for Delivery
                           </option>
 
-                          <option value="Delivered">
-                            Delivered
-                          </option>
+                          <option value="Delivered">Delivered</option>
 
-                          <option value="Cancelled">
-                            Cancelled
-                          </option>
+                          <option value="Cancelled">Cancelled</option>
                         </select>
-
                       </td>
-
                     </tr>
                   ))}
                 </tbody>
-
               </table>
-
             </div>
           </div>
         )}
-
       </main>
     </div>
   );

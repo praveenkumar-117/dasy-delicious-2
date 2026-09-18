@@ -16,7 +16,7 @@ const MyOrders = () => {
 
     try {
       const response = await axios.get(
-        "http://localhost:7000/api/order/userorders",
+        "https://dasy-delicious-2.onrender.com/api/order/userorders",
         {
           headers: {
             token: token,
@@ -115,7 +115,7 @@ const MyOrders = () => {
                       <div key={index} className="flex items-center gap-4">
                         {food ? (
                           <img
-                            src={`http://localhost:7000/images/${food.image}`}
+                            src={`https://dasy-delicious-2.onrender.com/images/${food.image}`}
                             alt={food.name}
                             className="w-20 h-20 object-cover rounded-lg"
                           />

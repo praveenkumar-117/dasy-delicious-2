@@ -11,12 +11,12 @@ const Feedbacks = () => {
         const adminToken = localStorage.getItem("adminToken");
 
         const response = await axios.get(
-          "http://localhost:7000/api/feedback/all",
+          "https://dasy-delicious-2.onrender.com/api/feedback/all",
           {
             headers: {
               admintoken: adminToken,
             },
-          }
+          },
         );
 
         if (response.data.success) {
@@ -32,15 +32,12 @@ const Feedbacks = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
-
       {/* Sidebar */}
       <AdminSidebar />
 
       {/* Main Content */}
       <div className="flex-1 p-5 sm:p-8">
-
         <div className="bg-white rounded-xl shadow-md p-5 sm:p-7">
-
           <h1 className="text-2xl sm:text-3xl font-bold text-orange-500 text-center mb-8">
             Customers Feedback
           </h1>
@@ -51,18 +48,14 @@ const Feedbacks = () => {
             </div>
           ) : (
             <div className="space-y-4">
-
               {feedbacks.map((feedback) => (
                 <div
                   key={feedback._id}
                   className="border border-gray-200 rounded-lg bg-gray-100 shadow-sm overflow-hidden"
                 >
-
                   {/* Name + Date */}
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-5 py-4 bg-orange-400 text-black">
-                    <h2 className="font-semibold text-lg">
-                      {feedback.name}
-                    </h2>
+                    <h2 className="font-semibold text-lg">{feedback.name}</h2>
 
                     <p className="text-sm">
                       {new Date(feedback.date).toLocaleDateString()}
@@ -82,17 +75,12 @@ const Feedbacks = () => {
                       {feedback.email}
                     </p>
                   </div>
-
                 </div>
               ))}
-
             </div>
           )}
-
         </div>
-
       </div>
-
     </div>
   );
 };

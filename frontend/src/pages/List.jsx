@@ -8,7 +8,7 @@ const List = () => {
   const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const url = "http://localhost:7000";
+  const url = "https://dasy-delicious-2.onrender.com";
 
   const fetchList = async () => {
     try {
@@ -17,7 +17,7 @@ const List = () => {
       const adminToken = localStorage.getItem("adminToken");
 
       const response = await axios.get(
-        "http://localhost:7000/api/admin/food/list",
+        "https://dasy-delicious-2.onrender.com/api/admin/food/list",
         {
           headers: {
             admintoken: adminToken,
@@ -39,7 +39,7 @@ const List = () => {
       const adminToken = localStorage.getItem("adminToken");
 
       const response = await axios.post(
-        "http://localhost:7000/api/admin/food/delete",
+        "https://dasy-delicious-2.onrender.com/api/admin/food/delete",
         { id },
         {
           headers: {

@@ -18,8 +18,7 @@ const Payment = () => {
 
   const subtotal = getCartAmount();
 
-  const deliveryCharge =
-    subtotal === 0 ? 0 : subtotal < 500 ? 40 : 0;
+  const deliveryCharge = subtotal === 0 ? 0 : subtotal < 500 ? 40 : 0;
 
   const tax = subtotal * 0.05;
 
@@ -31,7 +30,7 @@ const Payment = () => {
     setTimeout(async () => {
       try {
         const response = await axios.post(
-          "http://localhost:7000/api/order/verify",
+          "https://dasy-delicious-2.onrender.com/api/order/verify",
           {
             orderId: orderId,
           },
@@ -61,11 +60,8 @@ const Payment = () => {
     return (
       <div className="bg-blue-100 min-h-screen flex items-center justify-center px-4">
         <div className="bg-gray-100 w-full max-w-md rounded-xl shadow-md p-8 text-center">
-
           <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-green-100 flex items-center justify-center">
-            <span className="text-4xl text-green-500">
-              ✓
-            </span>
+            <span className="text-4xl text-green-500">✓</span>
           </div>
 
           <h2 className="text-2xl font-bold text-gray-800 mb-2">
@@ -77,13 +73,10 @@ const Payment = () => {
           </p>
 
           <div className="bg-gray-200 rounded-lg p-4 mb-6">
-
             <div className="flex justify-between text-gray-700">
               <span>Payment Method</span>
 
-              <span className="font-semibold uppercase">
-                {paymentMethod}
-              </span>
+              <span className="font-semibold uppercase">{paymentMethod}</span>
             </div>
 
             <div className="flex justify-between text-gray-800 mt-3">
@@ -93,7 +86,6 @@ const Payment = () => {
                 ₹{orderAmount.toFixed(2)}
               </span>
             </div>
-
           </div>
 
           <button
@@ -103,7 +95,6 @@ const Payment = () => {
           >
             Continue Shopping
           </button>
-
         </div>
       </div>
     );
@@ -111,14 +102,11 @@ const Payment = () => {
 
   return (
     <div className="bg-blue-100 min-h-screen py-8 px-4 sm:px-8">
-
       {/* Processing Payment Overlay */}
 
       {paymentProcessing && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 px-4">
-
           <div className="bg-gray-100 w-full max-w-sm rounded-xl shadow-xl p-8 text-center">
-
             <div className="w-16 h-16 mx-auto mb-5 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin"></div>
 
             <h2 className="text-xl font-bold text-gray-800 mb-2">
@@ -132,9 +120,7 @@ const Payment = () => {
             <div className="mt-5 bg-gray-200 rounded-full h-2 overflow-hidden">
               <div className="h-full bg-orange-400 rounded-full animate-pulse w-full"></div>
             </div>
-
           </div>
-
         </div>
       )}
 
@@ -151,9 +137,7 @@ const Payment = () => {
       </button>
 
       <div className="max-w-4xl mx-auto mt-5">
-
         <div className="bg-gray-100 rounded-xl shadow-md p-5 sm:p-7">
-
           <h2 className="text-2xl font-bold text-gray-800 mb-6">
             Choose Payment Method
           </h2>
@@ -161,7 +145,6 @@ const Payment = () => {
           {/* Payment Methods */}
 
           <div className="space-y-3">
-
             {/* Card */}
 
             <label
@@ -171,9 +154,7 @@ const Payment = () => {
                   : "border-gray-300"
               }`}
             >
-
               <div className="flex items-center gap-3">
-
                 <input
                   type="radio"
                   name="payment"
@@ -192,14 +173,12 @@ const Payment = () => {
                     Pay securely using your card
                   </p>
                 </div>
-
               </div>
 
               {/* Card Form */}
 
               {paymentMethod === "card" && (
                 <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-
                   <input
                     type="text"
                     placeholder="Card Holder Name"
@@ -230,10 +209,8 @@ const Payment = () => {
                     disabled={paymentProcessing}
                     className="p-2.5 border border-gray-300 rounded-md bg-white focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-300 disabled:bg-gray-200"
                   />
-
                 </div>
               )}
-
             </label>
 
             {/* UPI */}
@@ -245,9 +222,7 @@ const Payment = () => {
                   : "border-gray-300"
               }`}
             >
-
               <div className="flex items-center gap-3">
-
                 <input
                   type="radio"
                   name="payment"
@@ -258,32 +233,24 @@ const Payment = () => {
                 />
 
                 <div>
-                  <p className="font-semibold text-gray-800">
-                    UPI
-                  </p>
+                  <p className="font-semibold text-gray-800">UPI</p>
 
-                  <p className="text-sm text-gray-500">
-                    Pay using your UPI ID
-                  </p>
+                  <p className="text-sm text-gray-500">Pay using your UPI ID</p>
                 </div>
-
               </div>
 
               {/* UPI Form */}
 
               {paymentMethod === "upi" && (
                 <div className="mt-5">
-
                   <input
                     type="text"
                     placeholder="Enter UPI ID (example@upi)"
                     disabled={paymentProcessing}
                     className="w-full p-2.5 border border-gray-300 rounded-md bg-white focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-300 disabled:bg-gray-200"
                   />
-
                 </div>
               )}
-
             </label>
 
             {/* COD */}
@@ -295,9 +262,7 @@ const Payment = () => {
                   : "border-gray-300"
               }`}
             >
-
               <div className="flex items-center gap-3">
-
                 <input
                   type="radio"
                   name="payment"
@@ -316,17 +281,13 @@ const Payment = () => {
                     Pay when your order arrives
                   </p>
                 </div>
-
               </div>
-
             </label>
-
           </div>
 
           {/* Order Summary */}
 
           <div className="bg-gray-200 rounded-lg p-5 mt-6">
-
             <h3 className="text-xl font-bold text-gray-800 mb-4">
               Order Summary
             </h3>
@@ -337,7 +298,6 @@ const Payment = () => {
             </div>
 
             <div className="flex justify-between mb-3 text-gray-700">
-
               <p>Delivery Fee</p>
 
               <p>
@@ -345,7 +305,6 @@ const Payment = () => {
                   ? "Free"
                   : `₹${deliveryCharge}`}
               </p>
-
             </div>
 
             <div className="flex justify-between mb-4 text-gray-700">
@@ -354,15 +313,9 @@ const Payment = () => {
             </div>
 
             <div className="border-t border-gray-400 pt-4 flex justify-between text-lg">
+              <b className="text-gray-800">Total</b>
 
-              <b className="text-gray-800">
-                Total
-              </b>
-
-              <b className="text-orange-600">
-                ₹{total.toFixed(2)}
-              </b>
-
+              <b className="text-orange-600">₹{total.toFixed(2)}</b>
             </div>
 
             <button
@@ -373,13 +326,9 @@ const Payment = () => {
             >
               Pay ₹{total.toFixed(2)}
             </button>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
   );
 };

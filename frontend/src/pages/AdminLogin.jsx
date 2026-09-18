@@ -1,60 +1,51 @@
-import React, { useState } from 'react'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    setError("")
-    setLoading(true)
+    setError("");
+    setLoading(true);
 
     try {
       const response = await axios.post(
-        "http://localhost:7000/api/admin/login",
+        "https://dasy-delicious-2.onrender.com/api/admin/login",
         {
           email,
-          password
-        }
-      )
+          password,
+        },
+      );
 
       if (response.data.success) {
-        localStorage.setItem("adminToken", response.data.token)
+        localStorage.setItem("adminToken", response.data.token);
 
-        navigate("/admin/additems")
+        navigate("/admin/additems");
       }
-
     } catch (error) {
-      console.log("ADMIN LOGIN ERROR:", error)
+      console.log("ADMIN LOGIN ERROR:", error);
 
-      setError(
-        error.response?.data?.message || "Login failed"
-      )
+      setError(error.response?.data?.message || "Login failed");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-blue-50 flex items-center justify-center px-4">
-
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
-
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">
-            Admin Login
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-800">Admin Login</h1>
 
-          <p className="text-gray-500 mt-2">
-            Login to manage Dasy Delicious
-          </p>
+          <p className="text-gray-500 mt-2">Login to manage Dasy Delicious</p>
         </div>
 
         {error && (
@@ -64,7 +55,6 @@ const AdminLogin = () => {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
-
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Email
@@ -106,13 +96,10 @@ const AdminLogin = () => {
           >
             {loading ? "Logging in..." : "Login"}
           </button>
-
         </form>
-
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default AdminLogin
+export default AdminLogin;

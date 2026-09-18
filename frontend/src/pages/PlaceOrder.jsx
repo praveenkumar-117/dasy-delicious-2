@@ -41,7 +41,7 @@ const PlaceOrder = () => {
 
       try {
         const response = await axios.get(
-          "http://localhost:7000/api/user/profile",
+          "https://dasy-delicious-2.onrender.com/api/user/profile",
           {
             headers: {
               token: token,
@@ -106,11 +106,11 @@ const PlaceOrder = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:7000/api/order/place",
+        "https://dasy-delicious-2.onrender.com/api/order/place",
         {
           items,
           amount: total,
-         
+
           address: isEditing ? formData : savedFormData,
         },
         {
@@ -347,7 +347,7 @@ const PlaceOrder = () => {
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <img
-                        src={`http://localhost:7000/images/${item.image}`}
+                        src={`https://dasy-delicious-2.onrender.com/images/${item.image}`}
                         alt={item.name}
                         className="w-14 h-14 object-cover rounded-lg shadow-sm"
                       />

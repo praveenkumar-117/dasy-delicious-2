@@ -19,7 +19,7 @@ const StoreContextProvider = (props) => {
   const fetchFoodList = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:7000/api/admin/food/list",
+        "https://dasy-delicious-2.onrender.com/api/admin/food/list",
       );
 
       setFoodList(response.data.data);
@@ -32,11 +32,14 @@ const StoreContextProvider = (props) => {
     if (!token) return;
 
     try {
-      const response = await axios.get("http://localhost:7000/api/cart/get", {
-        headers: {
-          token: token,
+      const response = await axios.get(
+        "https://dasy-delicious-2.onrender.com/api/cart/get",
+        {
+          headers: {
+            token: token,
+          },
         },
-      });
+      );
 
       if (response.data.success) {
         setCartItems(response.data.cartData);
@@ -61,7 +64,7 @@ const StoreContextProvider = (props) => {
 
     try {
       await axios.post(
-        "http://localhost:7000/api/cart/add",
+        "https://dasy-delicious-2.onrender.com/api/cart/add",
         { itemId },
         {
           headers: {
@@ -95,15 +98,12 @@ const StoreContextProvider = (props) => {
     });
 
     if (!token) {
-     
       return;
     }
 
     try {
-     
-
       const response = await axios.post(
-        "http://localhost:7000/api/cart/remove",
+        "https://dasy-delicious-2.onrender.com/api/cart/remove",
         { itemId },
         {
           headers: {
@@ -111,8 +111,6 @@ const StoreContextProvider = (props) => {
           },
         },
       );
-
-      
     } catch (error) {
       console.log("REMOVE ERROR:", error);
     }
@@ -125,7 +123,7 @@ const StoreContextProvider = (props) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:7000/api/cart/delete",
+        "https://dasy-delicious-2.onrender.com/api/cart/delete",
         { itemId },
         { headers: { token: token } },
       );
@@ -147,7 +145,7 @@ const StoreContextProvider = (props) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:7000/api/cart/clear",
+        "https://dasy-delicious-2.onrender.com/api/cart/clear",
         {},
         { headers: { token: token } },
       );

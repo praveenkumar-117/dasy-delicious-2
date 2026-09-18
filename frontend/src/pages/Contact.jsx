@@ -37,8 +37,8 @@ const Contact = () => {
       setIsSubmitting(true);
 
       const response = await axios.post(
-        "http://localhost:7000/api/feedback/submit",
-        formData
+        "https://dasy-delicious-2.onrender.com/api/feedback/submit",
+        formData,
       );
 
       if (response.data.success) {
@@ -53,9 +53,7 @@ const Contact = () => {
     } catch (error) {
       console.log("SUBMIT FEEDBACK ERROR:", error);
 
-      toast.error(
-        error.response?.data?.message || "Failed to send message"
-      );
+      toast.error(error.response?.data?.message || "Failed to send message");
     } finally {
       setIsSubmitting(false);
     }
@@ -63,22 +61,17 @@ const Contact = () => {
 
   return (
     <div className="bg-blue-100 pt-8 pb-12 px-4 sm:px-8 min-h-screen flex flex-col lg:flex-row justify-center gap-8">
-
       {/* Contact Information */}
       <div className="w-full lg:w-1/2 px-0 sm:px-4">
-
         <h2 className="text-center bg-orange-400 text-white p-4 rounded-md shadow-lg text-2xl sm:text-3xl font-bold">
           Get In Touch With Us Now!
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 font-semibold mt-8 gap-5">
-
           <div className="p-6 sm:p-8 flex flex-col items-center gap-2.5 bg-gray-100 border border-gray-300 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:scale-[1.03] hover:shadow-lg">
             <FaPhoneAlt className="text-orange-400 text-4xl" />
             <h2 className="text-xl">Phone Number</h2>
-            <p className="text-sm font-normal text-gray-600">
-              +91 98123 45450
-            </p>
+            <p className="text-sm font-normal text-gray-600">+91 98123 45450</p>
           </div>
 
           <div className="p-6 sm:p-8 flex flex-col items-center gap-2.5 bg-gray-100 border border-gray-300 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:scale-[1.03] hover:shadow-lg">
@@ -104,13 +97,11 @@ const Contact = () => {
               Mon - Fri: 9:00 AM - 6:00 PM
             </p>
           </div>
-
         </div>
       </div>
 
       {/* Contact Form */}
       <div className="w-full lg:w-1/2 px-0 sm:px-4">
-
         <h2 className="text-center bg-orange-400 text-white p-4 rounded-md shadow-lg text-2xl sm:text-3xl font-bold">
           Contact Us
         </h2>
@@ -119,7 +110,6 @@ const Contact = () => {
           onSubmit={handleSubmit}
           className="mt-8 py-6 px-5 sm:px-6 rounded-lg flex flex-col gap-4 bg-gray-100 shadow-md"
         >
-
           <input
             type="text"
             name="name"
@@ -154,11 +144,8 @@ const Contact = () => {
             {isSubmitting ? "Sending..." : "Send Message"}
             <IoIosSend />
           </button>
-
         </form>
-
       </div>
-
     </div>
   );
 };

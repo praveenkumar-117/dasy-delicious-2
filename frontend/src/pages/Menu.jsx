@@ -13,7 +13,7 @@ const Menu = () => {
 
   const { addToCart } = useContext(StoreContext);
 
-  const url = "http://localhost:7000";
+  const url = "https://dasy-delicious-2.onrender.com";
 
   const fetchList = async () => {
     try {
@@ -34,9 +34,7 @@ const Menu = () => {
     }
   };
 
-  const foodCategory = [
-    ...new Set(foodItem.map((item) => item.category)),
-  ];
+  const foodCategory = [...new Set(foodItem.map((item) => item.category))];
 
   useEffect(() => {
     fetchList();
@@ -87,17 +85,12 @@ const Menu = () => {
 
   return (
     <div className="w-full min-h-screen bg-blue-100 py-5 sm:py-6 px-3 sm:px-5 lg:px-6">
-
       <div className="w-full flex flex-col lg:flex-row gap-5 lg:gap-6">
-
         {/* Filters Section */}
         <div className="w-full lg:w-[230px] xl:w-[250px] h-fit bg-gray-100 rounded-2xl shadow-md p-5 sm:p-6 lg:sticky lg:top-5">
-
           {/* Filter Header */}
           <div className="flex justify-between items-center">
-            <h2 className="font-bold text-lg text-orange-600">
-              Filters
-            </h2>
+            <h2 className="font-bold text-lg text-orange-600">Filters</h2>
 
             <button
               type="button"
@@ -112,9 +105,7 @@ const Menu = () => {
 
           {/* Category */}
           <div>
-            <h3 className="font-semibold text-gray-800 mb-3">
-              Category
-            </h3>
+            <h3 className="font-semibold text-gray-800 mb-3">Category</h3>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-3">
               {foodCategory.length > 0 ? (
@@ -133,9 +124,7 @@ const Menu = () => {
                       className="w-4 h-4 accent-orange-600 cursor-pointer shrink-0"
                     />
 
-                    <span className="capitalize truncate">
-                      {category}
-                    </span>
+                    <span className="capitalize truncate">{category}</span>
                   </label>
                 ))
               ) : (
@@ -148,12 +137,9 @@ const Menu = () => {
 
           {/* Price */}
           <div className="mt-7">
-            <h3 className="font-semibold text-gray-800 mb-3">
-              Price
-            </h3>
+            <h3 className="font-semibold text-gray-800 mb-3">Price</h3>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-1 gap-3">
-
               <label className="flex items-center gap-2 cursor-pointer text-gray-700 hover:text-orange-600 text-sm sm:text-base">
                 <input
                   type="radio"
@@ -201,15 +187,12 @@ const Menu = () => {
                 />
                 <span>Above ₹500</span>
               </label>
-
             </div>
           </div>
         </div>
 
-
         {/* Menu Section */}
         <div className="flex-1 min-w-0 bg-gray-100 rounded-2xl shadow-md p-4 sm:p-6">
-
           {/* Menu Header */}
           <div className="text-center mb-6 sm:mb-8">
             <h2 className="font-bold text-2xl sm:text-3xl text-orange-600">
@@ -221,7 +204,6 @@ const Menu = () => {
             </p>
           </div>
 
-
           {/* Loading */}
           {isLoading && (
             <div className="flex justify-center items-center py-16 sm:py-20">
@@ -230,7 +212,6 @@ const Menu = () => {
               </p>
             </div>
           )}
-
 
           {/* Empty */}
           {!isLoading && filteredFood.length === 0 && (
@@ -249,17 +230,14 @@ const Menu = () => {
             </div>
           )}
 
-
           {/* Food Grid */}
           {!isLoading && filteredFood.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
-
               {filteredFood.map((item, index) => (
                 <div
                   key={item._id || index}
                   className="relative bg-blue-50 rounded-tl-4xl rounded-br-4xl p-4 sm:p-5 flex flex-col shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                 >
-
                   {/* Image */}
                   <div className="w-full h-44 sm:h-48 flex items-center justify-center overflow-hidden rounded-xl">
                     <img
@@ -272,12 +250,9 @@ const Menu = () => {
                     />
                   </div>
 
-
                   {/* Food Details */}
                   <div className="w-full mt-3">
-
                     <div className="flex justify-between items-start gap-2">
-
                       <h3 className="font-bold text-base sm:text-lg text-gray-800 truncate">
                         {item.name}
                       </h3>
@@ -285,9 +260,7 @@ const Menu = () => {
                       <span className="text-[11px] sm:text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full whitespace-nowrap capitalize shrink-0">
                         {item.category}
                       </span>
-
                     </div>
-
 
                     {/* Rating */}
                     <div className="flex items-center gap-0.5 text-amber-500 mt-2">
@@ -297,25 +270,19 @@ const Menu = () => {
                       <FaStar />
                       <FaRegStar />
 
-                      <span className="text-xs text-gray-500 ml-1">
-                        4.0
-                      </span>
+                      <span className="text-xs text-gray-500 ml-1">4.0</span>
                     </div>
-
 
                     {/* Description */}
                     <p className="text-gray-600 text-sm mt-2 leading-relaxed line-clamp-2 min-h-[40px]">
                       {item.description}
                     </p>
 
-
                     {/* Price */}
                     <p className="font-bold text-lg sm:text-xl text-orange-600 mt-3">
                       ₹{item.price}
                     </p>
-
                   </div>
-
 
                   {/* Add to Cart */}
                   <button
@@ -325,15 +292,11 @@ const Menu = () => {
                   >
                     Add to Cart
                   </button>
-
                 </div>
               ))}
-
             </div>
           )}
-
         </div>
-
       </div>
     </div>
   );

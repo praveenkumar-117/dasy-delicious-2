@@ -38,7 +38,7 @@ const AddItems = () => {
       const adminToken = localStorage.getItem("adminToken");
 
       const response = await axios.post(
-        "http://localhost:7000/api/admin/food/add",
+        "https://dasy-delicious-2.onrender.com/api/admin/food/add",
         formData,
         {
           headers: {
