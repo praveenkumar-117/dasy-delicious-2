@@ -27,10 +27,10 @@ app.use("/api/order", orderRouter)
 app.use("/api/admin", adminRouter)
 app.use("/api/feedback", feedbackRouter);
 
-// const PORT = 7000;
+const PORT = 7000;
 
-// app.listen(PORT, () => {
-//   console.log(`Server is running at http://localhost:${PORT}`)
-// })
+app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`)
+})
 
-module.exports = app;
+// module.exports = app;
