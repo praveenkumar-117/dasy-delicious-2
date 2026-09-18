@@ -12,7 +12,7 @@ const feedbackRouter = require("./routes/feedbackRoutes");
 
 const app = express()
 
-const PORT = 7000;
+
 
 //middleware
 app.use(express.json())
@@ -27,8 +27,10 @@ app.use("/api/order", orderRouter)
 app.use("/api/admin", adminRouter)
 app.use("/api/feedback", feedbackRouter);
 
-app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`)
-})
+// const PORT = 7000;
 
+// app.listen(PORT, () => {
+//   console.log(`Server is running at http://localhost:${PORT}`)
+// })
 
+module.exports = app;
